@@ -10,13 +10,13 @@ import os
 URL_PREFIX = "https://ikman.lk/en/ad/"
 
 def get_parameter(name):
-    ssm = boto3.client('ssm', region_name='us-east-1')
+    ssm = boto3.client('ssm', region_name='us-east-2')
     parameter = ssm.get_parameter(Name=name, WithDecryption=True)
     return parameter['Parameter']['Value']
 
 def send_email(subject, body_text, to_addresses, from_address):
     # Create a new SES resource and specify a region.
-    client = boto3.client('ses',region_name="us-east-1")
+    client = boto3.client('ses',region_name="us-east-2")
 
     # Try to send the email.
     try:
@@ -51,7 +51,7 @@ def get_spreadsheet():
     session = boto3.session.Session()
     client = session.client(
         service_name='secretsmanager',
-        region_name="us-east-1"
+        region_name="us-east-2"
     )
 
     # Retrieve the secret
